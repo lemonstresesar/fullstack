@@ -1,0 +1,641 @@
+/* 1. Jetons */
+:root {
+  --fond: #faf8f4;
+  --carte: #fff;
+  --texte: #1a1c22;
+  --discret: #646a78;
+  --bord: #1a1c2214;
+  --accent: #b8893a;
+  --accent-fonce: #8a6420;
+  --erreur: #b3261e;
+  --rayon: 16px;
+  --marge: clamp(1rem, 4vw, 3rem);
+  --doux: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* 2. Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font:
+    1rem/1.6 system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1,
+h2,
+.logo {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.skip {
+  position: absolute;
+  inset: -4rem auto auto 1rem;
+  background: var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  z-index: 100;
+}
+.skip:focus {
+  inset-block-start: 1rem;
+}
+
+/* 3. En-tête et navigation */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  block-size: 4rem;
+  padding-inline: var(--marge);
+  border-bottom: 1px solid var(--bord);
+}
+.entete::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #faf8f4e6;
+  backdrop-filter: blur(12px);
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.logo span {
+  color: var(--accent);
+}
+.menu {
+  display: none;
+  position: absolute;
+  inset: 100% 0 auto;
+  flex-direction: column;
+  background: var(--fond);
+  border-bottom: 1px solid var(--bord);
+  padding: 0.5rem var(--marge) 1rem;
+}
+.menu.ouvert {
+  display: flex;
+}
+.menu a {
+  padding: 0.75rem 0;
+  font-weight: 500;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-inline-start: auto;
+}
+.btn-panier {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--bord);
+  border-radius: 99px;
+  background: var(--carte);
+  cursor: pointer;
+  font-weight: 600;
+}
+.badge {
+  min-inline-size: 1.5rem;
+  padding: 0 0.4rem;
+  border-radius: 99px;
+  background: var(--texte);
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+}
+.burger {
+  display: grid;
+  gap: 5px;
+  padding: 0.75rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.burger span {
+  inline-size: 22px;
+  block-size: 2px;
+  background: currentColor;
+}
+@media (min-width: 48rem) {
+  .menu {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    margin-inline: auto 1rem;
+  }
+  .menu a {
+    padding: 0;
+  }
+  .burger {
+    display: none;
+  }
+  .actions {
+    margin-inline-start: 0;
+  }
+}
+
+/* 4. Boutons et champs */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border: 0;
+  border-radius: 99px;
+  background: var(--texte);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    translate 0.2s var(--doux),
+    background 0.2s;
+}
+.btn:hover {
+  background: var(--accent-fonce);
+  translate: 0 -2px;
+}
+.btn--large {
+  inline-size: 100%;
+  text-align: center;
+  margin-block-start: 0.5rem;
+}
+.icone {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+.champ label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-block-end: 0.25rem;
+}
+.champ input,
+.champ select {
+  inline-size: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--bord);
+  border-radius: 12px;
+  background: var(--carte);
+}
+.champ {
+  margin-block-end: 0.75rem;
+}
+.erreur {
+  color: var(--erreur);
+  font-size: 0.85rem;
+  min-block-size: 1.2em;
+}
+[aria-invalid="true"] {
+  border-color: var(--erreur) !important;
+}
+
+/* 5. Vedette */
+.hero {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  padding: clamp(2rem, 6vw, 3.5rem) var(--marge);
+  background:
+    radial-gradient(60% 90% at 90% 0%, #b8893a33, transparent),
+    linear-gradient(180deg, #f3ecde, var(--fond));
+}
+.sur-titre {
+  color: var(--accent-fonce);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 1rem + 5vw, 4rem);
+  line-height: 1.05;
+  max-inline-size: 18ch;
+  text-wrap: balance;
+}
+.lead {
+  max-inline-size: 38rem;
+  color: var(--discret);
+  font-size: 1.1rem;
+}
+
+/* 6. Catalogue */
+.catalogue {
+  padding: 2rem var(--marge) 3rem;
+}
+.catalogue h2 {
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.2rem);
+  margin-block-end: 1rem;
+}
+.barre-outils {
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 40rem) {
+  .barre-outils {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+.chips {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-block: 0.5rem 1rem;
+  scrollbar-width: none;
+}
+.chip {
+  flex: none;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--bord);
+  border-radius: 99px;
+  background: var(--carte);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.chip[aria-pressed="true"] {
+  background: var(--texte);
+  color: #fff;
+  border-color: var(--texte);
+}
+.etat {
+  color: var(--discret);
+  padding-block: 0.5rem;
+}
+.grille {
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+}
+.produit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--carte);
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  overflow: hidden;
+  transition:
+    translate 0.25s var(--doux),
+    box-shadow 0.25s;
+}
+.produit:hover {
+  translate: 0 -4px;
+  box-shadow: 0 14px 30px #1a1c2218;
+}
+.visuel {
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(90% 70% at 20% 0%, hsl(var(--t) 80% 70% / 0.6), transparent),
+    linear-gradient(135deg, hsl(var(--t) 60% 48%), hsl(calc(var(--t) + 40) 55% 24%));
+}
+.etiquette {
+  position: absolute;
+  inset: 0.75rem auto auto 0.75rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 99px;
+  background: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.etiquette--rupture {
+  background: var(--texte);
+  color: #fff;
+}
+.corps {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem;
+  flex: 1;
+}
+.corps h3 {
+  font-size: 1.05rem;
+}
+.cat {
+  color: var(--discret);
+  font-size: 0.85rem;
+}
+.prix {
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+.corps .btn {
+  margin-block-start: auto;
+  justify-self: stretch;
+  text-align: center;
+  padding-block: 0.65rem;
+}
+.btn:disabled {
+  background: #c9ccd4;
+  cursor: not-allowed;
+  translate: 0 0;
+}
+
+/* 7. Infos et pied de page */
+.infos {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2.5rem var(--marge);
+  background: var(--carte);
+  border-block: 1px solid var(--bord);
+}
+@media (min-width: 48rem) {
+  .infos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.infos h3 {
+  margin-block-end: 0.25rem;
+}
+.infos p {
+  color: var(--discret);
+}
+.pied {
+  padding: 2rem var(--marge);
+  color: var(--discret);
+  font-size: 0.9rem;
+}
+
+/* 8. Panier : un tiroir (balise <dialog>) */
+dialog {
+  margin: 0 0 0 auto;
+  inline-size: min(100%, 26rem);
+  max-inline-size: 100%;
+  block-size: 100dvh;
+  max-block-size: 100dvh;
+  border: 0;
+  padding: 1.25rem;
+  background: var(--fond);
+  color: var(--texte);
+  overflow-y: auto;
+  box-shadow: -20px 0 60px #0003;
+}
+dialog[open] {
+  animation: glisser 0.35s var(--doux);
+}
+dialog::backdrop {
+  background: #10121866;
+  backdrop-filter: blur(3px);
+}
+@keyframes glisser {
+  from {
+    translate: 100% 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+.panier__tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: 1rem;
+}
+.lignes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.ligne {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--carte);
+  border: 1px solid var(--bord);
+  border-radius: 12px;
+}
+.ligne .mini {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background: linear-gradient(135deg, hsl(var(--t) 60% 48%), hsl(calc(var(--t) + 40) 55% 24%));
+}
+.ligne h3 {
+  font-size: 0.95rem;
+}
+.ligne small {
+  color: var(--discret);
+}
+.quantite {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block-start: 0.25rem;
+}
+.quantite button {
+  inline-size: 2.2rem;
+  block-size: 2.2rem;
+  border: 1px solid var(--bord);
+  border-radius: 50%;
+  background: var(--carte);
+  cursor: pointer;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  margin-block: 1rem;
+}
+.notifs {
+  position: fixed;
+  inset: auto 1rem 1rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  pointer-events: none;
+  z-index: 50;
+}
+.toast {
+  background: var(--texte);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px #0004;
+}
+
+/* 9. Mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 10. Pages React */
+main {
+  min-block-size: 60vh;
+}
+.page {
+  padding: 2rem var(--marge);
+  max-inline-size: 60rem;
+  margin-inline: auto;
+}
+.page h1,
+.catalogue h1 {
+  font-size: clamp(1.6rem, 1rem + 2vw, 2.4rem);
+  margin-block-end: 1rem;
+}
+.catalogue {
+  padding: 2rem var(--marge) 3rem;
+}
+.entete .actions {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  margin-inline-start: auto;
+}
+.entete a[aria-current="page"]:not(.btn-panier) {
+  color: var(--accent-fonce);
+  font-weight: 700;
+}
+.fiche {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 40rem) {
+  .fiche {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+.visuel.grand {
+  border-radius: var(--rayon);
+}
+.grand-prix {
+  font-size: 1.8rem;
+}
+.produit .visuel {
+  display: block;
+}
+.chip {
+  font: inherit;
+}
+
+/* 9. Commande envoyée au serveur, espace boutique (chapitre 25) */
+.confirmation {
+  background: color-mix(in srgb, var(--accent) 12%, var(--carte));
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: var(--rayon);
+  padding: 1rem 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+.erreur--serveur {
+  font-weight: 600;
+  margin-block: 0.75rem;
+}
+.commandes {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.commande {
+  background: var(--carte);
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: 1rem 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+}
+.commande header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.commande h2 {
+  font-size: 1.1rem;
+}
+.commande ul {
+  padding-left: 1.1rem;
+  margin: 0;
+}
+.statut {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent-fonce);
+}
+.commande[data-statut="annulee"] .statut {
+  background: color-mix(in srgb, var(--erreur) 14%, transparent);
+  color: var(--erreur);
+}
+.commande[data-statut="livree"] .statut {
+  background: #1a1c22;
+  color: #fff;
+}
+.actions-commande {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.barre-outils {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+.barre-outils .champ {
+  min-width: 12rem;
+}

@@ -1,0 +1,10 @@
+[
+  { "id": 1, "nom": "Pagne wax 6 yards", "categorie": "Textile", "prix_fcfa": 12000, "stock": 10, "teinte": 28 },
+  { "id": 2, "nom": "Sac en raphia", "categorie": "Artisanat", "prix_fcfa": 8500, "stock": 5, "teinte": 48 },
+  { "id": 3, "nom": "Savon noir artisanal", "categorie": "Beauté", "prix_fcfa": 1500, "stock": 50, "teinte": 260 },
+  { "id": 4, "nom": "Miel de Dschang 500 g", "categorie": "Épicerie", "prix_fcfa": 4500, "stock": 20, "teinte": 38 },
+  { "id": 5, "nom": "Café de Foumban 250 g", "categorie": "Épicerie", "prix_fcfa": 3000, "stock": 1, "teinte": 18 },
+  { "id": 6, "nom": "Beurre de karité 100 ml", "categorie": "Beauté", "prix_fcfa": 2500, "stock": 15, "teinte": 330 },
+  { "id": 7, "nom": "Poivre de Penja 100 g", "categorie": "Épicerie", "prix_fcfa": 3500, "stock": 12, "teinte": 150 },
+  { "id": 8, "nom": "Huile de palme rouge 1 L", "categorie": "Épicerie", "prix_fcfa": 2000, "stock": 0, "teinte": 8 }
+]

@@ -1,0 +1,22 @@
+OK site servi par Express, catalogue venu de la base : 8 produits
+OK badge du panier : 3
+OK panier : total 12 000 FCFA
+OK formulaire vide : 3 erreurs, aucune requête POST envoyée : True
+OK confirmation : Commande n° 1 enregistrée. Total : 12 000 FCFA. La boutique te contactera pour la livraison.
+OK lien WhatsApp contient le numéro de commande : True
+OK après la commande, le café est épuisé : True
+OK miel : 18 en stock
+OK une autre personne commande 4 sacs : statut 201
+OK conflit de stock affiché : Stock insuffisant. Sac en raphia : 1 en stock seulement.
+OK le panier est conservé : 1 ligne, bouton actif : True
+OK mauvais mot de passe : E-mail ou mot de passe incorrect.
+OK admin connecté : 2 commandes, la plus récente en premier : Commande n° 2
+OK commande 1 confirmée : boutons ['Marquer livrée', 'Annuler']
+OK filtre « Confirmées » : 1 commande
+OK commande 1 annulée : le café est revenu en stock (1)
+OK rechargement : la session est conservée (sessionStorage)
+OK déconnexion : retour au formulaire
+OK jeton invalide : le serveur répond 401, la page revient à la connexion
+OK page 404 React : Page introuvable
+OK route d'API inconnue : 404
+OK aucune erreur JavaScript ni violation de sécurité de la page : True

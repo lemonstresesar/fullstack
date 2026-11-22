@@ -1,0 +1,28 @@
+ok 1 - ajouter crée puis incrémente, sans modifier l'original
+ok 2 - on ne dépasse jamais le stock et on n'ajoute pas une rupture
+ok 3 - changer à zéro retire la ligne ; retirer supprime
+ok 4 - les prix viennent du catalogue : un panier trafiqué ne change rien
+ok 5 - une quantité stockée trop grande est ramenée au stock réel
+ok 6 - le message WhatsApp liste les lignes et le total
+ok 7 - un formulaire vide a trois erreurs
+ok 8 - un numéro camerounais valide est accepté, avec ou sans indicatif
+ok 9 - un numéro trop court ou ne commençant pas par 6 est refusé
+ok 10 - commande valide : 201, total calculé par la BASE, téléphone normalisé, stock décrémenté
+ok 11 - un prix envoyé par le client est ignoré
+ok 12 - stock insuffisant : 409 et RIEN n'est enregistré (transaction annulée)
+ok 13 - entrées invalides : produit inconnu, panier vide, doublon, quantité, téléphone
+ok 14 - concurrence : 8 clients veulent les 3 derniers articles, exactement 3 réussissent
+ok 15 - consultation : réservée à l'admin (401, 403, 200) ; filtre par statut
+ok 16 - statuts : transitions permises, annulation qui remet le stock, états finaux
+ok 17 - limite : la 3e commande de la même adresse est refusée (429)
+ok 18 - inscription : 201, e-mail normalisé, aucune empreinte renvoyée, rôle toujours « client »
+ok 19 - inscription : mot de passe faible, e-mail invalide, doublon
+ok 20 - connexion : jeton lisible mais signé ; mêmes réponses pour « mauvais mot de passe » et « compte inconnu »
+ok 21 - jetons : valide accepté ; absent, trafiqué, expiré, sans signature refusés
+ok 22 - autorisations : lecture publique, écriture réservée à l'admin (401 puis 403 puis 201)
+ok 23 - validation zod : un type faux est refusé avec un message par champ
+ok 24 - limite d'essais : la 4e tentative de connexion est refusée (429)
+ok 25 - en-têtes de sécurité (helmet) et configuration refusée si la clé est trop courte
+# tests 25
+# pass 25
+# fail 0
